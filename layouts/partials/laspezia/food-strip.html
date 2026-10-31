@@ -1,0 +1,24 @@
+{{- /* Food strip: shows the photos that exist. If fewer than 3 exist, fills with art tiles so the strip stays full. */ -}}
+{{- $keys := slice "food-1" "food-2" "food-3" "food-4" "food-5" "food-6" -}}
+{{- $have := 0 -}}
+{{- range $keys -}}{{- if resources.Get (printf "images/%s.jpg" .) -}}{{- $have = add $have 1 -}}{{- end -}}{{- end -}}
+<section id="cocina" class="section food day reveal" aria-labelledby="food-title">
+  <div class="wrap">
+    <p class="script-kicker">{{ i18n "food_kicker" }}</p>
+    <h2 id="food-title">{{ i18n "food_h2" }}</h2>
+    <p class="section-line">{{ i18n "food_line" }}</p>
+  </div>
+  <div class="wrap wrap--wide">
+    <ul class="food-grid" aria-label="{{ i18n "food_aria" }}" tabindex="0">
+      {{ range $keys }}
+        {{ $exists := resources.Get (printf "images/%s.jpg" .) }}
+        {{ if or $exists (lt $have 3) }}
+          <li class="food-tile {{ if eq . "food-1" }}food-tile--lead{{ end }}">
+            {{- /* EDIT: PHOTO {{ . }}.jpg - caption/alt/focal point in data/photos.yaml */ -}}
+            {{ partial "laspezia/photo.html" (dict "key" . "kind" "food" "widths" (slice 480 720 1000) "ratio" (slice 4 5) "sizes" "(min-width: 64rem) 380px, 78vw" "caption" true) }}
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+</section>

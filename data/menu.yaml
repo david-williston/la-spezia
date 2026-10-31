@@ -1,0 +1,38 @@
+# ============================================================================
+# MENU  (edit here)
+#
+# - Prices are shown ONLY where a price is written. Leave `price` out and nothing is shown.
+# - Only five prices are sourced (MXN): Champiñones y Aceitunas 200, Frutti di Mare 240,
+#   Gustosa 220, Filete a la Veracruzana 240, Puttanesca 240. CONFIRM they are current.
+# - Category of each dish (e.g. Gustosa = pizza? Puttanesca = pasta?) is NOT confirmed.
+# - `name` is the Spanish name; add name_it / name_en only where the name is translated.
+# - `lang: it` marks an Italian dish name (screen readers pronounce it right).
+# - Do NOT add vegetarian or other dietary labels unless the owner confirms each dish.
+# Group titles come from i18n files (menu_pizzas, menu_pasta, menu_sea, menu_drinks).
+# ============================================================================
+groups:
+  - key: pizzas
+    items:
+      - { name: "Champiñones y Aceitunas", name_it: "Funghi e Olive", name_en: "Mushroom & Olive", price: 200 }
+      - { name: "Frutti di Mare", lang: it, price: 240 }
+      - { name: "Gustosa", lang: it, price: 220 }
+      - { name: "Ortolana", lang: it }
+      - { name: "Capricciosa", lang: it }
+      - { name: "Quattro Formaggi", lang: it }
+      - { name: "Calzone", lang: it }
+  - key: pasta
+    items:
+      - { name: "Puttanesca", lang: it, price: 240 }
+      - { name: "Fettuccine Alfredo", lang: it }
+      - { name: "Fettuccine Alfredo con camarones", name_it: "Fettuccine Alfredo con gamberi", name_en: "Fettuccine Alfredo with shrimp" }
+      - { name: "Carbonara", lang: it }
+      - { name: "Ravioli di Carne", lang: it }
+  - key: sea
+    items:
+      - { name: "Filete a la Veracruzana", name_it: "Filetto alla Veracruzana", name_en: "Fillet Veracruz-style", price: 240 }
+      - { name: "Ensalada César", name_it: "Insalata Caesar", name_en: "Caesar salad" }
+  - key: drinks
+    # Drinks are listed generically; no individual items or prices are sourced.
+    items:
+      - { name: "Cócteles", name_it: "Cocktail", name_en: "Cocktails" }
+      - { name: "Cerveza fría", name_it: "Birra fresca", name_en: "Cold beer" }

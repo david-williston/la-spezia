@@ -1,0 +1,11 @@
+{{- /* "14:30" -> "14:30" (es, it) or "2:30 pm" (en). args: t (string) */ -}}
+{{- $p := split .t ":" -}}
+{{- $h := int (index $p 0) -}}
+{{- $m := index $p 1 -}}
+{{- $out := printf "%d:%s" $h $m -}}
+{{- if eq site.Language.Lang "en" -}}
+  {{- $suffix := cond (ge $h 12) "pm" "am" -}}
+  {{- $h12 := mod $h 12 -}}{{- if eq $h12 0 -}}{{- $h12 = 12 -}}{{- end -}}
+  {{- $out = printf "%d:%s %s" $h12 $m $suffix -}}
+{{- end -}}
+{{- return $out -}}

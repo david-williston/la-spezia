@@ -1,0 +1,25 @@
+{{- $s := .Params.story -}}
+<section id="historia" class="section story day reveal" aria-labelledby="story-title">
+  <div class="wrap story-grid">
+    <div class="story-text">
+      <p class="script-kicker" lang="it">{{ $s.kicker }}</p>
+      <h2 id="story-title">{{ $s.h2 }}</h2>
+      <p>{{ $s.p1 }}</p>
+      <p>{{ $s.p2 }}</p>
+      <ul class="chips">
+        {{ range $s.chips }}<li>{{ . }}</li>{{ end }}
+      </ul>
+    </div>
+    <div class="story-photo">
+      {{- /* EDIT: PHOTO ambiente-1.jpg - polaroid, 4:5 portrait. Focal point in data/photos.yaml. */ -}}
+      {{ partial "laspezia/photo.html" (dict "key" "ambiente-1" "kind" "ambiente" "class" "polaroid" "widths" (slice 480 720 900) "ratio" (slice 4 5) "sizes" "(min-width: 64rem) 420px, 80vw") }}
+    </div>
+  </div>
+  <div class="wrap">
+    <blockquote class="pullquote">
+      <p lang="es">&ldquo;{{ $s.quote }}&rdquo;</p>
+      {{ with $s.quote_gloss }}<p class="gloss">{{ . }}</p>{{ end }}
+      <footer>{{ $s.attribution }}</footer>
+    </blockquote>
+  </div>
+</section>

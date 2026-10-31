@@ -1,0 +1,23 @@
+{{- /* One photo in a frame that still looks finished if the file is missing.
+       args: key (data/photos.yaml key), class, widths, ratio (slice), sizes, eager (bool), kind (food|ambiente|hero|band), caption (bool) */ -}}
+{{- $d := index hugo.Data.photos .key -}}
+{{- $lang := site.Language.Lang -}}
+{{- $set := partial "laspezia/srcset.html" (dict "file" $d.file "widths" .widths "ratio" .ratio) -}}
+{{- $alt := index $d (printf "alt_%s" $lang) -}}
+{{- $cap := index $d (printf "caption_%s" $lang) -}}
+{{- $style := printf "--fx:%s;--fy:%s" $d.focus_x $d.focus_y -}}
+{{- with $d.focus_x_m }}{{ $style = printf "%s;--fx-m:%s;--fy-m:%s" $style . $d.focus_y_m }}{{ end -}}
+<figure class="photo photo--{{ .kind }} {{ .class }}{{ if not $set }} is-missing{{ end }}" style="{{ $style | safeCSS }}">
+  {{- /* EDIT: PHOTO {{ $d.file }} - focal point and alt text live in data/photos.yaml */ -}}
+  {{ if $set -}}
+    <img src="{{ $set.src }}" srcset="{{ $set.srcset }}" sizes="{{ .sizes }}" width="{{ $set.width }}" height="{{ $set.height }}"
+      alt="{{ $alt }}" decoding="async" {{ if .eager }}fetchpriority="high"{{ else }}loading="lazy"{{ end }}>
+  {{- else -}}
+    <div class="photo-fallback" aria-hidden="true">
+      {{ if eq .kind "food" }}<svg class="fb-pizza"><use href="#i-pizza"/></svg>
+      {{ else if eq .kind "ambiente" }}<span class="fb-script">{{ i18n "fallback_line" }}</span>
+      {{ else if eq .kind "hero" }}<svg class="fb-pizza"><use href="#i-pizza"/></svg>{{ end }}
+    </div>
+  {{- end }}
+  {{ if and .caption $cap }}<figcaption>{{ $cap }}</figcaption>{{ end }}
+</figure>

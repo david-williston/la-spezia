@@ -1,0 +1,17 @@
+# Contact and links. Confirm with the owner that the phone is public (and whether it takes WhatsApp).
+phone_display: "954 582 2437"
+phone_tel: "+529545822437"
+address_line1: "Blvd. Benito Juárez 227"
+address_line2: "Rinconada, 71983 Puerto Escondido, Oaxaca"
+# Directions: a Google Maps SEARCH link (no embed, no tracking). Check that the pin lands on the right corner.
+maps_url: "https://www.google.com/maps/search/?api=1&query=La+Spezia+Blvd.+Benito+Ju%C3%A1rez+227+Rinconada+Puerto+Escondido"
+instagram_handle: "@la_spezia_restaurante"
+instagram_url: "https://www.instagram.com/la_spezia_restaurante/"
+facebook_label: "Spezia Restaurante Pizzeria"
+facebook_url: "https://www.facebook.com/restaurante.laspezia.507"
+# Structured address (used for search-engine data). Keep in step with the two display lines above.
+street: "Blvd. Benito Juárez 227"
+locality: "Rinconada, Puerto Escondido"
+region: "Oaxaca"
+postal_code: "71983"
+country_code: "MX"

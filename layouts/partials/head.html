@@ -1,0 +1,89 @@
+{{- /* Lean <head> for La Spezia (replaces Blowfish's head.html: no theme JS, no analytics, no extra requests).
+       The ONLY external request on the site is Google Fonts. */ -}}
+{{- $info := hugo.Data.info -}}
+{{- $hours := hugo.Data.hours -}}
+{{- $desc := .Params.description | default site.Params.description -}}
+{{- $title := cond .IsHome site.Title (printf "%s · %s" .Title site.Title) -}}
+{{- $share := "" -}}
+{{- with resources.Get "images/hero.jpg" }}{{ $share = .Fill "1200x630 Center jpg q80" }}{{ end -}}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $desc }}">
+  <meta name="theme-color" content="#B3262B">
+  {{ if site.Params.noindex }}<meta name="robots" content="noindex, nofollow">{{ else if eq .Kind "404" }}<meta name="robots" content="noindex">{{ end }}
+  {{ if ne .Kind "404" }}
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ else }}
+  {{ end }}
+  {{- /* hreflang: self-referencing + reciprocal for es/it/en, plus x-default -> Spanish */ -}}
+  {{ if and .IsTranslated (ne .Kind "404") }}
+    {{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+      {{ if eq .Language.Lang "es" }}<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">{{ end }}
+    {{ end }}
+  {{ end }}
+  {{- /* Open Graph + Twitter card (1200x630 share image made from hero.jpg) */ -}}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="La Spezia">
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  {{ if ne .Kind "404" }}<meta property="og:url" content="{{ .Permalink }}">{{ end }}
+  <meta property="og:locale" content="{{ replace site.Language.Locale "-" "_" }}">
+  {{ if ne .Kind "404" }}{{ range .AllTranslations }}{{ if ne .Language.Lang $.Language.Lang }}<meta property="og:locale:alternate" content="{{ replace .Language.Locale "-" "_" }}">{{ end }}{{ end }}{{ end }}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  {{ with $share }}
+  <meta property="og:image" content="{{ .Permalink }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ index (index hugo.Data.photos "hero") (printf "alt_%s" site.Language.Lang) }}">
+  <meta name="twitter:image" content="{{ .Permalink }}">
+  {{ end }}
+  {{- /* Fonts (Google Fonts, display=swap) */ -}}
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,600..800,0..100,0..1;1,9..144,600,0..100,0..1&family=Work+Sans:wght@400;500;600&family=Yellowtail&display=swap">
+  {{- /* CSS: Blowfish colour scheme + Blowfish base CSS + our custom.css */ -}}
+  {{ $scheme := resources.Get (printf "css/schemes/%s.css" (lower (site.Params.colorScheme | default "laspezia"))) }}
+  {{ $css := slice $scheme (resources.Get "css/compiled/main.css") (resources.Get "css/custom.css") | resources.Concat "css/main.bundle.css" | resources.Minify | resources.Fingerprint "sha512" }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- /* Favicons: own SVG + PNG (no external assets) */ -}}
+  <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+  {{- /* Preload the hero (never lazy) */ -}}
+  {{ if .IsHome }}
+    {{ $set := partial "laspezia/srcset.html" (dict "file" "hero.jpg" "widths" (slice 800 1200 1600)) }}
+    {{ if $set }}{{ printf `<link rel="preload" as="image" href="%s" imagesrcset="%s" imagesizes="100vw" fetchpriority="high">` $set.src $set.srcset | safeHTML }}{{ end }}
+  {{ end }}
+  {{- /* Restaurant structured data, built from data/*.yaml so it always matches the page.
+         Omitted on purpose: priceRange, ratings, reviews. Opening hours only when data/hours.yaml has confirmed: true. */ -}}
+  {{ if .IsHome }}
+    {{ $ld := dict
+      "@context" "https://schema.org"
+      "@type" "Restaurant"
+      "name" "La Spezia"
+      "description" $desc
+      "url" .Permalink
+      "inLanguage" site.Language.Locale
+      "servesCuisine" (slice "Italian" "Pizza")
+      "telephone" $info.phone_tel
+      "address" (dict "@type" "PostalAddress" "streetAddress" $info.street "addressLocality" $info.locality "addressRegion" $info.region "postalCode" $info.postal_code "addressCountry" $info.country_code)
+      "hasMap" $info.maps_url
+      "menu" (printf "%s#menu" .Permalink)
+      "sameAs" (slice $info.instagram_url $info.facebook_url) }}
+    {{ with $share }}{{ $ld = merge $ld (dict "image" .Permalink) }}{{ end }}
+    {{ if $hours.confirmed }}
+      {{ $names := slice "Sunday" "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" }}
+      {{ $spec := slice }}
+      {{ range $hours.days }}{{ if not .closed }}
+        {{ $spec = $spec | append (dict "@type" "OpeningHoursSpecification" "dayOfWeek" (index $names .weekday) "opens" .open "closes" .close) }}
+      {{ end }}{{ end }}
+      {{ $ld = merge $ld (dict "openingHoursSpecification" $spec) }}
+    {{ end }}
+  <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+  {{ end }}
+</head>

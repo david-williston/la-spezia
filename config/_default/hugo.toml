@@ -1,0 +1,70 @@
+# La Spezia - Hugo site config (Blowfish v3.9.0 vendored in themes/blowfish)
+# ######################################################################################
+# #  baseURL = the public address of the site. It feeds canonical links, hreflang,      #
+# #  the share image (og:image), the sitemap and robots.txt, so it MUST be correct.     #
+# #  Right now it is the GitHub Pages PROJECT URL (note the /la-spezia/ subfolder).     #
+# #  If a custom domain is used later, change it to that, e.g. "https://yourdomain/".   #
+# #  (The GitHub Actions deploy overrides it automatically with the Pages address.)     #
+# ######################################################################################
+baseURL = "https://david-williston.github.io/la-spezia/"
+defaultContentLanguage = "es"       # Spanish at "/"
+defaultContentLanguageInSubdir = false  # Italian at /it/, English at /en/
+enableRobotsTXT = true
+enableEmoji = false
+summaryLength = 0
+disableKinds = ["taxonomy", "term", "RSS"]
+timeout = "60s"
+
+[outputs]
+  home = ["HTML"]   # no RSS/JSON: this is a one-page info site
+
+[imaging]
+  quality = 78
+  anchor = "Smart"
+  resampleFilter = "CatmullRom"
+  [imaging.exif]
+    disableDate = true
+    disableLatLong = true   # never publish GPS data from photos
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+# Mounts: re-declare the defaults and expose the owner's images/ folder to Hugo image processing.
+[module]
+  [[module.imports]]
+    path = "blowfish"   # themes/blowfish (only the parts we use; its favicons/static are NOT published)
+    [[module.imports.mounts]]
+      source = "layouts"
+      target = "layouts"
+    [[module.imports.mounts]]
+      source = "assets"
+      target = "assets"
+    [[module.imports.mounts]]
+      source = "i18n"
+      target = "i18n"
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "i18n"
+    target = "i18n"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "images"
+    target = "assets/images"

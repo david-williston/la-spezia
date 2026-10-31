@@ -1,0 +1,22 @@
+{{- $hero := .Params.hero -}}
+{{- $info := hugo.Data.info -}}
+<section id="inicio" class="hero" aria-labelledby="hero-title">
+  <div class="hero-media">
+    {{- /* EDIT: PHOTO hero.jpg - focal point in data/photos.yaml. Fallback (no photo): dark panel + pizza art. */ -}}
+    {{ partial "laspezia/photo.html" (dict "key" "hero" "kind" "hero" "class" "hero-photo" "widths" (slice 800 1200 1600) "sizes" "100vw" "eager" true) }}
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  {{ partial "laspezia/lights.html" . }}
+  <div class="hero-content">
+    <p class="kicker">{{ $hero.kicker }}</p>
+    <p class="sign" aria-hidden="true"><span>La Spezia</span></p>
+    <h1 id="hero-title">{{ $hero.h1 }}</h1>
+    <p class="lead">{{ $hero.lead }}</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#menu">{{ i18n "btn_menu" }}</a>
+      <a class="btn btn-outline" href="#visita">{{ i18n "btn_how" }}</a>
+    </div>
+    <p class="hero-tel"><a class="chip-link" href="tel:{{ $info.phone_tel }}"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>{{ i18n "call_us" }} <span class="nowrap">{{ $info.phone_display }}</span></a></p>
+  </div>
+  <div class="checks band band--hero" aria-hidden="true"></div>
+</section>

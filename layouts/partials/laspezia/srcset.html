@@ -1,0 +1,30 @@
+{{- /* Returns a dict {src, srcset, width, height} for images/<file> via Hugo image processing, or nil when the file is missing.
+       args: file, widths (candidate widths), ratio (optional slice [w h] -> cropped with Fill), webp q78.
+       Never upscales: widths are capped to what the source can supply. */ -}}
+{{- $res := resources.Get (printf "images/%s" .file) -}}
+{{- $out := "" -}}
+{{- if $res -}}
+  {{- $ratio := .ratio -}}
+  {{- $maxW := $res.Width -}}
+  {{- if $ratio -}}
+    {{- $maxW = math.Min $res.Width (div (mul $res.Height (index $ratio 0)) (index $ratio 1)) | int -}}
+  {{- end -}}
+  {{- $ws := slice -}}
+  {{- range .widths -}}{{- $ws = $ws | append (math.Min . $maxW | int) -}}{{- end -}}
+  {{- $ws = $ws | uniq | sort -}}
+  {{- $parts := slice -}}
+  {{- $last := "" -}}
+  {{- range $ws -}}
+    {{- $p := "" -}}
+    {{- if $ratio -}}
+      {{- $h := div (mul . (index $ratio 1)) (index $ratio 0) | int -}}
+      {{- $p = $res.Fill (printf "%dx%d Center webp q78" . $h) -}}
+    {{- else -}}
+      {{- $p = $res.Resize (printf "%dx webp q78" .) -}}
+    {{- end -}}
+    {{- $parts = $parts | append (printf "%s %dw" $p.RelPermalink .) -}}
+    {{- $last = $p -}}
+  {{- end -}}
+  {{- $out = dict "src" $last.RelPermalink "srcset" (delimit $parts ", ") "width" $last.Width "height" $last.Height -}}
+{{- end -}}
+{{- return $out -}}

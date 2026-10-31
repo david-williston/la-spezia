@@ -1,0 +1,94 @@
+# ============================================================================
+# PHOTOS: focal point + alt text + caption for each file in images/
+#
+# To swap a photo: replace the file in images/ (same name), then adjust here:
+#   focus_x / focus_y = which part of the photo stays visible when cropped (0% left/top ... 100% right/bottom)
+#   *_m = same, but for phones (optional)
+# Alt text describes what the photo really shows. Update it if you change the photo.
+# Photos are user-contributed Google Maps photos used with the owner's permission (reconfirm before launch).
+# The ambiente-1 photo shows a staff member at the counter - confirm he is OK with it, or swap the photo.
+# ============================================================================
+hero:
+  file: hero.jpg
+  focus_x: 55%
+  focus_y: 55%
+  focus_x_m: 22%
+  focus_y_m: 40%
+  alt_es: "La Spezia de noche: la barra roja con el letrero de la pizzería, luces colgantes y mesas al aire libre"
+  alt_it: "La Spezia di sera: il bancone rosso con l'insegna della pizzeria, le lucine appese e i tavoli all'aperto"
+  alt_en: "La Spezia at night: the red counter with the pizzeria sign, string lights and outdoor tables"
+ambiente-1:
+  file: ambiente-1.jpg
+  focus_x: 50%
+  focus_y: 55%
+  alt_es: "El interior de La Spezia: barra roja y cocina abierta, con el horno encendido al fondo"
+  alt_it: "L'interno di La Spezia: bancone rosso e cucina a vista, con il forno acceso sullo sfondo"
+  alt_en: "Inside La Spezia: a red counter and open kitchen, with the oven glowing in the back"
+ambiente-2:
+  file: ambiente-2.jpg
+  focus_x: 50%
+  focus_y: 78%
+  alt_es: "Mesa con mantel rojo a cuadros, una pizza con jamón y arúgula, y bebidas"
+  alt_it: "Tavolo con tovaglia rossa a quadretti, una pizza con prosciutto e rucola, e bevande"
+  alt_en: "A table with a red checkered cloth, a pizza with ham and arugula, and drinks"
+food-1:
+  file: food-1.jpg
+  focus_x: 50%
+  focus_y: 55%
+  caption_es: "Pizza al horno de domo"
+  caption_it: "Pizza nel forno a cupola"
+  caption_en: "Dome-oven pizza"
+  alt_es: "Pizza de base blanca con champiñones y aceitunas"
+  alt_it: "Pizza bianca con funghi e olive"
+  alt_en: "White-base pizza with mushrooms and olives"
+food-2:
+  file: food-2.jpg
+  focus_x: 50%
+  focus_y: 55%
+  caption_es: "Pizza con arúgula"
+  caption_it: "Pizza con rucola"
+  caption_en: "Arugula pizza"
+  alt_es: "Pizza con arúgula sobre un mantel rojo a cuadros"
+  alt_it: "Pizza con rucola su una tovaglia rossa a quadretti"
+  alt_en: "Arugula pizza on a red checkered cloth"
+food-3:
+  file: food-3.jpg
+  focus_x: 50%
+  focus_y: 55%
+  caption_es: "Pizza de cuatro quesos"
+  caption_it: "Pizza ai quattro formaggi"
+  caption_en: "Four-cheese pizza"
+  alt_es: "Pizza blanca con varios quesos"
+  alt_it: "Pizza bianca con diversi formaggi"
+  alt_en: "White pizza with several cheeses"
+food-4:
+  file: food-4.jpg
+  focus_x: 50%
+  focus_y: 55%
+  caption_es: "Ravioles en salsa de tomate"
+  caption_it: "Ravioli al pomodoro"
+  caption_en: "Ravioli in tomato sauce"
+  alt_es: "Ravioles rellenos en salsa de tomate"
+  alt_it: "Ravioli ripieni in salsa di pomodoro"
+  alt_en: "Stuffed ravioli in tomato sauce"
+food-5:
+  # Identification approximate (looks like fried calzone-style pieces) - confirm with the owner.
+  file: food-5.jpg
+  focus_x: 38%
+  focus_y: 50%
+  caption_es: "Masa dorada con arúgula y vino tinto"
+  caption_it: "Impasto dorato con rucola e vino rosso"
+  caption_en: "Golden pastry with arugula and red wine"
+  alt_es: "Piezas de masa dorada sobre arúgula con jitomates cherry, y una copa de vino tinto"
+  alt_it: "Pezzi di impasto dorato su rucola con pomodorini e un calice di vino rosso"
+  alt_en: "Golden pastry pieces on arugula with cherry tomatoes, and a glass of red wine"
+food-6:
+  file: food-6.jpg
+  focus_x: 50%
+  focus_y: 55%
+  caption_es: "Pasta con almejas y mejillones"
+  caption_it: "Pasta con vongole e cozze"
+  caption_en: "Pasta with clams and mussels"
+  alt_es: "Espagueti con almejas y mejillones"
+  alt_it: "Spaghetti con vongole e cozze"
+  alt_en: "Spaghetti with clams and mussels"

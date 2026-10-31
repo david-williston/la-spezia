@@ -1,0 +1,19 @@
+{{- $info := hugo.Data.info -}}
+<footer class="site-footer night">
+  <div class="wrap">
+    {{ partial "laspezia/lights.html" . }}
+    <p class="foot-mark">La Spezia</p>
+    <p class="foot-title">{{ i18n "footer_title" }}</p>
+    <p>{{ i18n "footer_tag" }}</p>
+    <address>
+      {{ $info.address_line1 }}, {{ $info.address_line2 }}<br>
+      <a href="tel:{{ $info.phone_tel }}">{{ $info.phone_display }}</a>
+    </address>
+    <p class="foot-links">
+      <a href="{{ $info.instagram_url }}" target="_blank" rel="noopener">Instagram {{ $info.instagram_handle }}<span class="sr-only"> {{ i18n "new_tab" }}</span></a>
+      <a href="{{ $info.facebook_url }}" target="_blank" rel="noopener">Facebook<span class="sr-only"> {{ i18n "new_tab" }}</span></a>
+    </p>
+    <p class="muted">{{ i18n "footer_love" }} · {{ i18n "footer_photos" }} · &copy; <span data-year>{{ now.Year }}</span> La Spezia</p>
+    <p><a class="to-top" href="#inicio">{{ i18n "footer_top" }}</a></p>
+  </div>
+</footer>

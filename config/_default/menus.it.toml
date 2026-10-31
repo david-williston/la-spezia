@@ -1,0 +1,20 @@
+[[main]]
+  name = "La storia"
+  url = "#historia"
+  weight = 10
+[[main]]
+  name = "Cucina"
+  url = "#cocina"
+  weight = 20
+[[main]]
+  name = "Menù"
+  url = "#menu"
+  weight = 30
+[[main]]
+  name = "Vieni a trovarci"
+  url = "#visita"
+  weight = 40
+[[main]]
+  name = "Social"
+  url = "#redes"
+  weight = 50

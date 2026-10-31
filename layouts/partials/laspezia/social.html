@@ -1,0 +1,14 @@
+{{- $info := hugo.Data.info -}}
+<section id="redes" class="section social reveal" aria-labelledby="social-title">
+  <div class="checks band band--top" aria-hidden="true"></div>
+  <div class="wrap social-inner">
+    <h2 id="social-title" class="script-h">{{ i18n "social_h" }}</h2>
+    <p>{{ i18n "social_line" }}</p>
+    {{- /* EDIT: SOCIAL LINKS - handles/URLs live in data/info.yaml */ -}}
+    <div class="btn-row btn-row--center">
+      <a class="btn btn-light" href="{{ $info.instagram_url }}" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg>Instagram · {{ $info.instagram_handle }}<span class="sr-only"> {{ i18n "new_tab" }}</span></a>
+      <a class="btn btn-light" href="{{ $info.facebook_url }}" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg>Facebook · {{ $info.facebook_label }}<span class="sr-only"> {{ i18n "new_tab" }}</span></a>
+    </div>
+  </div>
+  <div class="checks band band--bottom" aria-hidden="true"></div>
+</section>

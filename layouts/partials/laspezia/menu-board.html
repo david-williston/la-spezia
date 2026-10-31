@@ -1,0 +1,34 @@
+{{- /* Chalkboard menu. All dishes/prices live in data/menu.yaml. Prices appear only where written; no dietary labels. */ -}}
+{{- $lang := site.Language.Lang -}}
+<section id="menu" class="section menu night reveal" aria-labelledby="menu-title">
+  {{ partial "laspezia/lights.html" . }}
+  <svg class="leaf leaf--l" aria-hidden="true" focusable="false"><use href="#i-leaf"/></svg>
+  <svg class="leaf leaf--r" aria-hidden="true" focusable="false"><use href="#i-leaf"/></svg>
+  <div class="wrap wrap--board">
+    <div class="board">
+      <header class="board-head">
+        <h2 id="menu-title">{{ i18n "menu_title" }}</h2>
+        <p class="board-sub">{{ i18n "menu_sub" }}</p>
+        <p class="doodle" aria-hidden="true">{{ i18n "menu_doodle" }}</p>
+      </header>
+      <div class="board-cols">
+        {{ range hugo.Data.menu.groups }}
+          <section class="menu-group">
+            <h3>{{ i18n (printf "menu_%s" .key) }}</h3>
+            <ul>
+              {{ range .items }}
+                {{- $name := index . (printf "name_%s" $lang) | default .name -}}
+                <li class="dish">
+                  <span class="dish-name">{{ if eq .lang "it" }}<span lang="it">{{ $name }}</span>{{ else }}{{ $name }}{{ end }}</span>
+                  {{ with .price }}<span class="dish-leader" aria-hidden="true"></span><span class="dish-price"><span class="cur">{{ i18n "price_unit" }}</span> {{ . }}</span>{{ end }}
+                </li>
+              {{ end }}
+            </ul>
+          </section>
+        {{ end }}
+      </div>
+      <p class="board-foot">{{ i18n "menu_allergen" }}</p>
+      <p class="board-foot">{{ i18n "menu_foot" }}</p>
+    </div>
+  </div>
+</section>

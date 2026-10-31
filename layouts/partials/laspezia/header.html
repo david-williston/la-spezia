@@ -1,0 +1,30 @@
+{{- $home := site.Home.RelPermalink -}}
+<header class="site-header">
+  <div class="header-inner">
+    <a class="wordmark" href="{{ $home }}">La Spezia</a>
+    <nav id="site-nav" class="site-nav" aria-label="{{ i18n "nav_label" }}">
+      <ul>
+        {{ range site.Menus.main }}
+          <li><a href="{{ if $.IsHome }}{{ .URL }}{{ else }}{{ $home }}{{ .URL }}{{ end }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    <div class="header-tools">
+      {{- /* 3-way language switcher: plain links to the same page in each language. Each language name is in its own language. */ -}}
+      <div class="lang-switch" role="group" aria-label="{{ i18n "lang_label" }}">
+        {{ range site.Home.AllTranslations.ByLanguage }}
+          {{- $here := eq .Language.Lang site.Language.Lang -}}
+          {{- $target := .RelPermalink -}}
+          <a href="{{ $target }}" lang="{{ .Language.Params.isoCode }}" hreflang="{{ .Language.Locale }}"
+             aria-label="{{ .Language.Label }}" {{ if $here }}aria-current="page" class="is-active"{{ end }}>{{ .Language.Params.displayName }}</a>
+        {{ end }}
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="{{ i18n "nav_open" }}"
+              data-label-open="{{ i18n "nav_open" }}" data-label-close="{{ i18n "nav_close" }}">
+        <span class="nav-toggle-text">{{ i18n "nav_toggle" }}</span>
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+    </div>
+  </div>
+  <div class="checks band band--header" aria-hidden="true"></div>
+</header>

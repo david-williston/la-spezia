@@ -1,0 +1,18 @@
+{{- /* Project-level page shell. Replaces Blowfish's boxed article shell so the sections can be full-bleed.
+       Still uses Blowfish's head partial (SEO, hreflang, CSS bundle). Do not edit themes/blowfish. */ -}}
+<!doctype html>
+<html lang="{{ site.Language.Params.isoCode | default site.Language.Lang }}" dir="ltr">
+  {{- partial "head.html" . -}}
+  <body class="laspezia">
+    {{ partial "laspezia/sprite.html" . }}
+    <a class="skip-link" href="#main-content">{{ i18n "skip" }}</a>
+    {{ partial "laspezia/header.html" . }}
+    <main id="main-content" tabindex="-1">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "laspezia/footer.html" . }}
+    {{ with resources.Get "js/laspezia.js" | resources.Minify | resources.Fingerprint "sha512" }}
+      <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}"></script>
+    {{ end }}
+  </body>
+</html>

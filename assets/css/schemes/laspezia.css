@@ -1,0 +1,38 @@
+/* La Spezia scheme: tomato primary, crust/terracotta secondary, warm cream-to-asphalt neutral.
+   Format copied from Blowfish's bundled schemes (comma-separated RGB triplets). */
+:root {
+  --color-neutral: 242, 238, 230;
+  --color-neutral-50: 251, 249, 245;
+  --color-neutral-100: 242, 238, 230;
+  --color-neutral-200: 228, 221, 208;
+  --color-neutral-300: 210, 200, 184;
+  --color-neutral-400: 184, 178, 168;
+  --color-neutral-500: 140, 133, 125;
+  --color-neutral-600: 107, 101, 96;
+  --color-neutral-700: 74, 70, 66;
+  --color-neutral-800: 43, 47, 44;
+  --color-neutral-900: 30, 30, 34;
+  --color-neutral-950: 20, 20, 23;
+  --color-primary-50: 251, 237, 236;
+  --color-primary-100: 246, 211, 209;
+  --color-primary-200: 236, 166, 163;
+  --color-primary-300: 222, 116, 112;
+  --color-primary-400: 203, 74, 71;
+  --color-primary-500: 179, 38, 43;
+  --color-primary-600: 143, 30, 34;
+  --color-primary-700: 116, 26, 29;
+  --color-primary-800: 90, 21, 23;
+  --color-primary-900: 63, 15, 17;
+  --color-primary-950: 42, 10, 11;
+  --color-secondary-50: 250, 240, 234;
+  --color-secondary-100: 242, 220, 203;
+  --color-secondary-200: 230, 182, 151;
+  --color-secondary-300: 217, 138, 98;
+  --color-secondary-400: 201, 88, 46;
+  --color-secondary-500: 168, 68, 42;
+  --color-secondary-600: 122, 74, 42;
+  --color-secondary-700: 99, 59, 33;
+  --color-secondary-800: 75, 45, 25;
+  --color-secondary-900: 51, 31, 17;
+  --color-secondary-950: 34, 20, 11;
+}

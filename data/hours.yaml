@@ -1,0 +1,21 @@
+# ============================================================================
+# OPENING HOURS  (the one place to change them)
+#
+# !! NOT CONFIRMED !!  Our sources disagree:
+#     - "Daily 2:30 pm - 10:30 pm, closed Wednesday"
+#     - "Closes 10:00 pm"
+# Call the restaurant, fix the times below, then change  confirmed: false  to  confirmed: true
+# (that removes the "call to confirm" warning on the site).
+#
+# weekday: 0 = Sunday, 1 = Monday ... 6 = Saturday.  Use 24-hour times.
+# A closed day: { weekday: 3, closed: true }
+# ============================================================================
+confirmed: false
+days:
+  - { weekday: 1, open: "14:30", close: "22:30" }
+  - { weekday: 2, open: "14:30", close: "22:30" }
+  - { weekday: 3, closed: true }
+  - { weekday: 4, open: "14:30", close: "22:30" }
+  - { weekday: 5, open: "14:30", close: "22:30" }
+  - { weekday: 6, open: "14:30", close: "22:30" }
+  - { weekday: 0, open: "14:30", close: "22:30" }

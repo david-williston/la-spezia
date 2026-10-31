@@ -1,0 +1,50 @@
+# Blowfish parameters. This site replaces most of the theme's chrome with its own layouts,
+# so everything the theme can do that we do not need is switched OFF here.
+colorScheme = "laspezia"
+defaultAppearance = "light"
+autoSwitchAppearance = false
+enableSearch = false
+enableCodeCopy = false
+enableA11y = false
+disableImageOptimization = false
+disableImageZoom = true
+robots = ""
+
+# PROTOTYPE SWITCH: while true, every page says "noindex, nofollow" and robots.txt blocks all crawlers
+# (search engines will not list the site). Set to false at launch, once hours, prices and photo
+# permissions are confirmed. See README.md.
+noindex = true
+
+[languageRedirect]
+  enabled = false      # no automatic browser-language redirect: Spanish is the default
+
+[header]
+  layout = "basic"
+[footer]
+  showCopyright = false
+  showThemeAttribution = false
+  showAppearanceSwitcher = false
+  showScrollToTop = false
+[homepage]
+  layout = "custom"
+  showRecent = false
+[article]
+  showTableOfContents = false
+  showReadingTime = false
+  showBreadcrumbs = false
+  showRelatedContent = false
+  showComments = false
+  showViews = false
+  showLikes = false
+  showAuthor = false
+  showAuthorsBadge = false
+  showHero = false
+  showWordCount = false
+  showDateUpdated = false
+  showEdit = false
+  showSummary = false
+  showPagination = false
+  showTaxonomies = false
+  sharingLinks = false
+[verification]
+[advertisement]

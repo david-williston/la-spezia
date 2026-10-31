@@ -1,0 +1,10 @@
+locale = "it-IT"
+label = "Italiano"
+weight = 2
+title = "La Spezia · Pizzeria italiana a Puerto Escondido"
+
+[params]
+  displayName = "IT"
+  isoCode = "it"
+  rtl = false
+  description = "Pizza e pasta fatte a mano da un pizzaiolo italiano, cotte nel forno a cupola. Un angolo all'aperto a Rinconada, Puerto Escondido."

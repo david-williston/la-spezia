@@ -1,0 +1,10 @@
+locale = "en-US"
+label = "English"
+weight = 3
+title = "La Spezia · Italian Pizzeria in Puerto Escondido"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  description = "Hand-made pizza and pasta by an Italian pizzaiolo, from a dome oven. An open-air corner in Rinconada, Puerto Escondido."
