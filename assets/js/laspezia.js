@@ -39,4 +39,15 @@
       if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add("is-pending"); io.observe(el); }
     });
   }
+
+  // Pause infinite animations (string lights, idle glint) when off-screen or the tab is hidden
+  if (!reduce && "IntersectionObserver" in window) {
+    var po = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle("is-offscreen", !en.isIntersecting); });
+    });
+    d.querySelectorAll(".lights, .hero-tel .chip-link").forEach(function (el) { po.observe(el); });
+  }
+  d.addEventListener("visibilitychange", function () {
+    d.documentElement.classList.toggle("tab-hidden", d.hidden);
+  });
 })();

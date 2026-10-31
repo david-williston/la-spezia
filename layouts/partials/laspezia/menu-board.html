@@ -13,7 +13,7 @@
       </header>
       <div class="board-cols">
         {{ range hugo.Data.menu.groups }}
-          <section class="menu-group">
+          <section class="menu-group reveal">
             <h3>{{ i18n (printf "menu_%s" .key) }}</h3>
             <ul>
               {{ range .items }}

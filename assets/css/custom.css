@@ -296,3 +296,64 @@ main:focus { outline: none; }
   .map-link .map { transition: transform .2s, box-shadow .2s, border-color .2s; }
   .map-link:hover .map { transform: translateY(-3px); box-shadow: 0 14px 30px -12px rgb(122 74 42 / .6); }
 }
+
+/* ==========================================================================
+   ANIMATIONS ("trattoria at dusk": warm, slow, subtle).  One motion language:
+   200-700ms, ease-out (--ease), transform + opacity only, small distances.
+   Everything below lives inside prefers-reduced-motion: no-preference, so people who ask for
+   less motion get a fully static, fully visible page.
+   TO TONE DOWN: lengthen/shorten the --dur-* values, lower the glint alpha (.28), or delete a block.
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  :root { --ease: cubic-bezier(.22, .61, .36, 1); --dur-fast: 220ms; --dur-med: 420ms; --dur-slow: 650ms; }
+
+  /* Link / button colour and underline transitions */
+  .laspezia a { transition: color var(--dur-fast) var(--ease), text-decoration-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease); }
+  .laspezia a:not(.btn):not(.chip-link):hover { text-decoration-thickness: 2px; }
+
+  /* Hero entrance: text rises in, staggered. The photo itself is NOT animated, so LCP is unaffected.
+     Total delay <= 300ms; elements are visible without JS because this is pure CSS. */
+  .hero-content > * { animation: rise var(--dur-slow) var(--ease) both; }
+  .hero-content > :nth-child(2) { animation-delay: 60ms; }
+  .hero-content > :nth-child(3) { animation-delay: 120ms; }
+  .hero-content > :nth-child(4) { animation-delay: 180ms; }
+  .hero-content > :nth-child(5) { animation-delay: 240ms; }
+  .hero-content > :nth-child(6) { animation-delay: 300ms; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* Button glints: a soft diagonal sweep inside the button (overflow hidden), on hover / keyboard focus */
+  .btn-primary, .btn-ghost, .chip-link { position: relative; overflow: hidden; isolation: isolate; }
+  .btn-primary::after, .btn-ghost::after, .chip-link::after {
+    content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 38%; z-index: -1; pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgb(255 244 214 / .28), transparent);
+    transform: translateX(-130%) skewX(-18deg); opacity: 0;
+  }
+  .btn-primary:hover::after, .btn-primary:focus-visible::after,
+  .btn-ghost:hover::after, .btn-ghost:focus-visible::after,
+  .chip-link:hover::after, .chip-link:focus-visible::after { animation: glint 800ms var(--ease) 1; }
+  @keyframes glint { 0% { transform: translateX(-130%) skewX(-18deg); opacity: 1; } 100% { transform: translateX(360%) skewX(-18deg); opacity: 1; } }
+  /* Very occasional idle glint, main call button only (~once every 8s, 0.8s long) */
+  .hero-tel .chip-link::after { animation: glint-idle 8s ease-in-out 2.5s infinite; }
+  .hero-tel .chip-link:hover::after, .hero-tel .chip-link:focus-visible::after { animation: glint 800ms var(--ease) 1; }
+  @keyframes glint-idle { 0% { transform: translateX(-130%) skewX(-18deg); opacity: 1; } 10%, 100% { transform: translateX(360%) skewX(-18deg); opacity: 1; } }
+
+  /* String lights: slow, soft twinkle (opacity only, well under 3 flashes per second) */
+  .lights { animation: twinkle 6s ease-in-out infinite; }
+  .menu .lights { animation-duration: 8s; animation-delay: -3s; }
+  .site-footer .lights { animation-duration: 7s; animation-delay: -1.5s; }
+  @keyframes twinkle { 0%, 100% { opacity: 1; } 40% { opacity: .82; } 70% { opacity: .96; } }
+
+  /* Photos: tiny hover lift, consistent with the map card */
+  .food-tile .photo, .polaroid { transition: box-shadow var(--dur-med) var(--ease); }
+  .food-tile img { transition: transform var(--dur-slow) var(--ease); }
+  .polaroid { transition: transform var(--dur-med) var(--ease), box-shadow var(--dur-med) var(--ease); }
+  @media (min-width: 48rem) { .polaroid:hover { transform: rotate(1.5deg) translateY(-3px); box-shadow: 0 16px 34px -14px rgb(122 74 42 / .6); } }
+
+  /* Chalkboard groups fade in one after another using the existing .reveal mechanism */
+  .menu-group.reveal:nth-child(2) { transition-delay: 120ms; }
+  .menu-group.reveal:nth-child(3) { transition-delay: 240ms; }
+  .menu-group.reveal:nth-child(4) { transition-delay: 360ms; }
+
+  /* Pause endless animations when off-screen or the tab is hidden (set by laspezia.js) */
+  .is-offscreen, .is-offscreen::after, .tab-hidden .lights, .tab-hidden .chip-link::after { animation-play-state: paused !important; }
+}

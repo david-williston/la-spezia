@@ -48,6 +48,13 @@ In `config/_default/params.toml`, `noindex = true` tells Google and others NOT t
 (every page gets a noindex tag and `robots.txt` blocks everything). It is ON because hours, prices and photo
 permissions are not confirmed yet. **At launch, change it to `noindex = false`** and publish again.
 
+## Animations
+All motion (hero entrance, button glints, twinkling string lights, photo/map hover lifts, menu fade-in) is in
+`assets/css/custom.css`, in the section headed "ANIMATIONS". It is all inside a
+"prefers-reduced-motion: no-preference" block, so visitors who ask their phone/computer for less motion see a
+static page. To tone it down: raise the glint's transparency number (`.28`), lengthen `--dur-*`, or delete the
+block you don't want (for example the `glint-idle` line removes the occasional glint on the call button).
+
 ## Check before launch
 Photo permission, hours, prices, menu categories, Italian text read by the owner, the Instagram quote,
 and that the phone number is public. (Full list in `DESIGN.md`, section 9.)
